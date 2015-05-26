@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>test.com</groupId>
+	<artifactId>stuffing</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+
+	<properties>
+		<java.version>1.7</java.version>
+		<javaee-api.version>6.0</javaee-api.version>
+		<javax-servlet.version>3.0.1</javax-servlet.version>
+		<vaadin.version>7.4.6</vaadin.version>
+		<vaadin.plugin.version>7.4.6</vaadin.plugin.version>
+		<project.encoding>UTF-8</project.encoding>
+		<spring.security.version>3.2.5.RELEASE</spring.security.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<hibernate.version>4.3.10.Final</hibernate.version>		
+	</properties>
+
+
+
+	<!-- Repositories management for Vaadin -->
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+		<repository>
+			<id>vaadin-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax-servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${javaee-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!--  
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+			-->
+
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-server</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-client-compiled</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+
+			<!-- Optional for extending client-side See: https://vaadin.com/book/-/page/clientside.html -->
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-client</artifactId>
+				<version>${vaadin.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Optional for optimizing client-side widgets See: https://vaadin.com/book/-/page/mobile.optimization.html -->
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-client-compiler</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-themes</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-widgets</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+
+			<!-- Optional push support for communication See: https://vaadin.com/book/-/page/advanced.push.html -->
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-push</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+
+			<!-- Vaadin CDI modulo per la Context Dependency Injection java -->
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-cdi</artifactId>
+				<version>1.0.2</version>
+			</dependency>
+			
+			<!-- 
+				Spring Framework
+			
+			 -->
+		    <dependency>
+		        <groupId>org.springframework</groupId>
+		        <artifactId>spring-context</artifactId>
+		        <version>${spring.version}</version>
+		    </dependency>
+
+			<!-- Spring ORM support -->
+	        <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-orm</artifactId>
+	            <version>${spring.version}</version>
+	        </dependency>			 
+			
+			<!-- 
+				Persistence framework
+			 -->
+			<dependency>
+			    <groupId>org.hibernate</groupId>
+			    <artifactId>hibernate-core</artifactId>
+			    <version>${hibernate.version}</version>
+			</dependency>			 
+ 		
+	 		<!-- Apache BasicDataSource -->
+	 		<dependency>    
+	            <groupId>commons-dbcp</groupId>
+	            <artifactId>commons-dbcp</artifactId>
+	            <version>1.4</version>
+	        </dependency>
+ 
+	 		<!-- MySQL database driver -->
+	 		<dependency>    
+	            <groupId>mysql</groupId>
+	            <artifactId>mysql-connector-java</artifactId>
+	            <version>5.1.23</version>
+	        </dependency>
+ 			 
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Maven core plugins -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<encoding>${project.encoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-maven-plugin</artifactId>
+					<version>${vaadin.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.17</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.6.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.8</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<!-- TODO Remove when http://dev.vaadin.com/ticket/14924 is resolved -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.vaadin</groupId>
+										<artifactId>vaadin-maven-plugin</artifactId>
+										<versionRange>[7.1.11,)</versionRange>
+										<goals>
+											<goal>resources</goal>
+											<goal>update-widgetset</goal>
+											<goal>compile</goal>
+											<goal>compile-theme</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+
+		</pluginManagement>
+	</build>
+
+	<modules>
+		<module>vaadin-war</module>
+		<module>stuff-ear</module>
+		<module>stuff-ejb</module>
+	</modules>
+
+</project>
